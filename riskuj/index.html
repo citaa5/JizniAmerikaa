@@ -1,162 +1,243 @@
 <!doctype html>
 <html lang="cs"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Riskuj – Jižní Amerika</title>
-<meta name="description" content="Riskuj na projektor: 4 témata × 5 otázek o Jižní Americe pro zeměpis v 8. ročníku. Týmy, body, odpovědi s fotkami.">
+<title>Riskuj – Jižní a Střední Amerika</title>
+<meta name="description" content="Riskuj na projektor: 6 témat × 5 otázek o Jižní a Střední Americe pro zeměpis v 8. ročníku. Týmy se střídají, ostatní můžou souhlasit.">
 <meta property="og:type" content="website"><meta property="og:url" content="https://citaa5.github.io/JizniAmerikaa/riskuj/">
-<meta property="og:title" content="Riskuj – Jižní Amerika"><meta property="og:description" content="Riskuj na projektor pro zeměpis: příroda, co se kde pěstuje, lidé a zvyky, hádej zemi.">
+<meta property="og:title" content="Riskuj – Jižní a Střední Amerika"><meta property="og:description" content="Riskuj na projektor pro zeměpis: příroda, co se kde pěstuje, lidé a sport, zvířata, hádej zemi, Střední Amerika.">
 <meta property="og:image" content="https://citaa5.github.io/JizniAmerikaa/img/ju_titul.jpg"><meta name="twitter:card" content="summary_large_image">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22%3E%3Ctext y=%22.9em%22 font-size=%2290%22%3E%F0%9F%8F%86%3C/text%3E%3C/svg%3E">
 <style>
-:root{--bg:#0F1B2A;--deska:#1C3350;--deska2:#24426A;--zlata:#F4B740;--text:#F5F1E8;--tlum:#9FB0C4;--akcent:#E0673C;--ok:#3FA36B;--spatne:#C9483B}
+:root{--bg:#0F1B2A;--deska:#1C3350;--deska2:#24426A;--zlata:#F4B740;--text:#F5F1E8;--tlum:#9FB0C4;--akcent:#E0673C;--ok:#3FA36B;--spatne:#C9483B;--sede:#34506F}
 *{box-sizing:border-box}html,body{margin:0;height:100%;overflow:hidden}
 body{background:var(--bg);color:var(--text);font-family:"Segoe UI",system-ui,-apple-system,Roboto,Arial,sans-serif;display:flex;flex-direction:column}
 button{font:inherit;color:inherit;cursor:pointer;border:0}
-header{display:flex;align-items:center;justify-content:space-between;padding:1.2vh 2vw}
-header h1{margin:0;font-size:clamp(22px,3.2vw,44px);letter-spacing:.02em}header h1 b{color:var(--zlata)}
-.mala{background:transparent;color:var(--tlum);border:2px solid #34506F;border-radius:10px;padding:.4em .9em;font-size:clamp(13px,1.1vw,17px)}
+button:focus-visible{outline:3px solid var(--zlata);outline-offset:2px}
+header{display:flex;align-items:center;gap:1.5vw;padding:1.2vh 2vw;flex-wrap:wrap}
+header h1{margin:0;font-size:clamp(20px,2.8vw,40px);letter-spacing:.02em;margin-right:auto}header h1 b{color:var(--zlata)}
+#naRade{background:var(--zlata);color:var(--bg);border-radius:99px;padding:.25em .9em;font-weight:800;font-size:clamp(15px,1.7vw,26px)}
+.mala{background:transparent;color:var(--tlum);border:2px solid var(--sede);border-radius:10px;padding:.4em .9em;font-size:clamp(13px,1.1vw,17px)}
 .mala:hover{color:var(--text);border-color:var(--tlum)}
-#tabule{flex:1;min-height:0;display:grid;grid-template-columns:repeat(4,1fr);grid-template-rows:auto repeat(5,minmax(0,1fr));gap:min(1vw,1.4vh);padding:0 2vw 1vh}
-.tema{display:grid;place-items:center;text-align:center;font-weight:800;font-size:clamp(16px,2vw,30px);padding:1.2vh .6vw;color:var(--zlata);text-transform:uppercase;letter-spacing:.04em;line-height:1.15}
-.pole{background:var(--deska);border-radius:14px;font-size:clamp(26px,min(5vw,7.5vh),80px);font-weight:900;color:var(--zlata);box-shadow:inset 0 -6px 0 rgba(0,0,0,.25);transition:transform .12s,background .12s}
+#tabule{flex:1;min-height:0;display:grid;grid-template-rows:auto repeat(5,minmax(0,1fr));gap:min(1vw,1.4vh);padding:0 2vw 1vh}
+.tema{display:grid;place-items:center;text-align:center;font-weight:800;font-size:clamp(13px,1.7vw,26px);padding:1vh .4vw;color:var(--zlata);text-transform:uppercase;letter-spacing:.04em;line-height:1.15}
+.pole{background:var(--deska);border-radius:14px;font-size:clamp(22px,min(4.4vw,7vh),76px);font-weight:900;color:var(--zlata);box-shadow:inset 0 -6px 0 rgba(0,0,0,.25);transition:transform .12s,background .12s}
 .pole:hover{background:var(--deska2);transform:scale(1.03)}
-.pole.hotovo{background:#152437;color:#3A526E;font-size:clamp(14px,1.4vw,22px);font-weight:700;box-shadow:none;cursor:default;transform:none}
-footer{display:flex;gap:1vw;padding:1.2vh 2vw 2vh;flex-wrap:wrap;justify-content:center}
-.tym{background:#17283D;border-radius:14px;padding:.6vh 1.2vw;display:flex;align-items:center;gap:.8vw;min-width:14vw;justify-content:space-between}
-.tym .jm{font-weight:700;font-size:clamp(15px,1.5vw,24px)}.tym .sk{font-weight:900;font-size:clamp(22px,2.6vw,40px);color:var(--zlata);min-width:3ch;text-align:right}
+.pole.hotovo{background:#152437;color:#5E7690;font-size:clamp(12px,1.2vw,19px);font-weight:700;box-shadow:none;cursor:default;transform:none;line-height:1.25;padding:2px}
+.pole.hotovo .z{display:block;font-size:1.4em}.pole.hotovo .ok{color:#62C28C}.pole.hotovo .ne{color:#E07A6E}
+footer{display:flex;gap:.8vw;padding:1vh 2vw 1.6vh;flex-wrap:wrap;justify-content:center}
+.tym{background:#17283D;border:3px solid transparent;border-radius:14px;padding:.5vh 1vw;display:flex;align-items:center;gap:.7vw}
+.tym.rada{border-color:var(--zlata)}
+.tym .jm{font-weight:700;font-size:clamp(14px,1.4vw,22px)}.tym .sk{font-weight:900;font-size:clamp(20px,2.3vw,36px);color:var(--zlata);min-width:2.6ch;text-align:right}
 .tym .uprav{display:flex;flex-direction:column;gap:2px}.tym .uprav button{background:#24384F;border-radius:6px;font-size:12px;padding:1px 6px;color:var(--tlum)}
-#okno{position:fixed;inset:0;background:var(--bg);display:none;flex-direction:column;padding:3vh 4vw;gap:2vh;z-index:5;overflow:auto}
-#okno.vidi{display:flex}
-#okno .hlava{display:flex;justify-content:space-between;align-items:center;color:var(--zlata);font-weight:800;font-size:clamp(18px,2vw,30px);text-transform:uppercase;letter-spacing:.04em}
-#okno .stred{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:2.5vh;min-height:0}
-#otazka{font-size:clamp(28px,4.4vw,72px);font-weight:800;line-height:1.2;max-width:90vw}
-#odpoved{display:none;flex-direction:column;align-items:center;gap:1.5vh;min-height:0}
+.vrstva{position:fixed;inset:0;background:var(--bg);display:none;flex-direction:column;padding:2.5vh 4vw;gap:1.6vh;z-index:5;overflow:auto}
+.vrstva.vidi{display:flex}
+#okno .hlava{display:flex;justify-content:space-between;align-items:center;gap:2vw;color:var(--zlata);font-weight:800;font-size:clamp(16px,1.8vw,28px);text-transform:uppercase;letter-spacing:.04em}
+#odpovida{background:var(--zlata);color:var(--bg);border-radius:99px;padding:.2em .9em;text-transform:none;letter-spacing:0}
+#okno .stred{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center;gap:2vh;min-height:0}
+#otazka{font-size:clamp(26px,4vw,68px);font-weight:800;line-height:1.2;max-width:90vw}
+#casovac{font-size:clamp(16px,1.6vw,26px);color:var(--tlum);display:flex;gap:1vw;align-items:center}
+#casovac b{font-size:1.6em;color:var(--zlata);min-width:2ch}#casovac b.konec{color:var(--spatne)}
+#odpoved{display:none;flex-direction:column;align-items:center;gap:1.2vh;min-height:0}
 #odpoved.vidi{display:flex}
-#odpoved .o{font-size:clamp(34px,5.4vw,90px);font-weight:900;color:var(--zlata);line-height:1.1}
-#odpoved .d{font-size:clamp(18px,2vw,32px);color:var(--tlum)}
-#odpoved img{max-height:34vh;max-width:70vw;border-radius:14px;object-fit:contain}
-#okno.odkryto #otazka{font-size:clamp(20px,2.6vw,40px);color:var(--tlum)}
+#odpoved .o{font-size:clamp(32px,5vw,84px);font-weight:900;color:var(--zlata);line-height:1.1}
+#odpoved .d{font-size:clamp(17px,1.9vw,30px);color:var(--tlum)}
+#odpoved img{max-height:30vh;max-width:70vw;border-radius:14px;object-fit:contain}
+.kredit{font-size:clamp(10px,.85vw,13px);color:#6F829A;margin-top:-.6vh}
+#okno.odkryto #otazka{font-size:clamp(18px,2.3vw,36px);color:var(--tlum)}
+#okno.odkryto #casovac{display:none}
+#souhlas{display:flex;flex-direction:column;align-items:center;gap:.8vh}
+#souhlas .popis{color:var(--tlum);font-size:clamp(14px,1.4vw,22px)}
+#souhlas .tl{display:flex;gap:.7vw;flex-wrap:wrap;justify-content:center}
+#souhlas button{background:#17283D;border:3px solid var(--sede);border-radius:12px;padding:.35em .9em;font-weight:700;font-size:clamp(15px,1.5vw,24px)}
+#souhlas button[aria-pressed=true]{background:#2B4A30;border-color:var(--ok)}
+#souhlas button[aria-pressed=true]::before{content:"✋ "}
+#souhlas button:disabled{cursor:default;opacity:.85}
 .akce{display:flex;gap:1vw;justify-content:center;flex-wrap:wrap}
-.velke{background:var(--akcent);border-radius:14px;padding:.6em 1.4em;font-weight:800;font-size:clamp(18px,2vw,32px)}
-.body-t{display:flex;gap:.8vw;flex-wrap:wrap;justify-content:center}
-.body-t .t{display:flex;border-radius:12px;overflow:hidden}
-.body-t .plus{background:var(--ok);padding:.5em 1em;font-weight:800;font-size:clamp(16px,1.6vw,26px)}
-.body-t .minus{background:var(--spatne);padding:.5em .7em;font-weight:800;font-size:clamp(16px,1.6vw,26px)}
-.body-t .nikdo{background:#34506F;border-radius:12px;padding:.5em 1em;font-weight:700;font-size:clamp(16px,1.6vw,26px)}
+.velke{background:var(--akcent);border-radius:14px;padding:.55em 1.3em;font-weight:800;font-size:clamp(17px,1.9vw,30px)}
+.velke.ok{background:var(--ok)}.velke.ne{background:var(--spatne)}.velke.sed{background:var(--sede)}
+#vysledek{font-size:clamp(18px,2vw,32px);font-weight:700;text-align:center;line-height:1.6}
+#vysledek .p{color:#62C28C}#vysledek .m{color:#E07A6E}
 .napoveda{color:var(--tlum);font-size:clamp(12px,1vw,16px);text-align:center}
-#start,#konec{position:fixed;inset:0;background:var(--bg);display:none;flex-direction:column;align-items:center;justify-content:center;gap:3vh;z-index:6;text-align:center;padding:4vw}
-#start.vidi,#konec.vidi{display:flex}
-#start h2,#konec h2{font-size:clamp(32px,5vw,80px);margin:0}#start h2 b,#konec h2 b{color:var(--zlata)}
-.pocty{display:flex;gap:1vw}.pocty button{background:var(--deska);border-radius:12px;width:3.2em;height:2.4em;font-size:clamp(18px,2vw,30px);font-weight:800}
+#start,#konec,#pravidla{align-items:center;justify-content:center;text-align:center;z-index:6}
+#start h2,#konec h2,#pravidla h2{font-size:clamp(30px,4.6vw,76px);margin:0}#start h2 b,#konec h2 b,#pravidla h2 b{color:var(--zlata)}
+.radek{display:flex;gap:1vw;align-items:center;flex-wrap:wrap;justify-content:center;font-size:clamp(17px,1.8vw,28px)}
+.pocty{display:flex;gap:.6vw}.pocty button{background:var(--deska);border-radius:12px;width:2.6em;height:2.2em;font-size:clamp(17px,1.8vw,28px);font-weight:800}
 .pocty button[aria-pressed=true]{background:var(--zlata);color:var(--bg)}
-#jmena{display:grid;grid-template-columns:repeat(3,minmax(160px,1fr));gap:1vw}
-#jmena input{font:inherit;font-size:clamp(16px,1.6vw,24px);padding:.4em .6em;border-radius:10px;border:2px solid #34506F;background:#17283D;color:var(--text)}
+#jmena{display:grid;grid-template-columns:repeat(4,minmax(140px,1fr));gap:.8vw}
+#jmena input{font:inherit;font-size:clamp(15px,1.5vw,22px);padding:.4em .6em;border-radius:10px;border:2px solid var(--sede);background:#17283D;color:var(--text)}
 #poradi{font-size:clamp(20px,2.4vw,38px);line-height:1.6}#poradi b{color:var(--zlata)}
+#pravidla ol{text-align:left;max-width:1000px;font-size:clamp(17px,1.8vw,28px);line-height:1.5;margin:0}
+#pravidla li{margin:.3em 0}#pravidla li b{color:var(--zlata)}
+@media (max-width:700px){#jmena{grid-template-columns:repeat(2,1fr)}}
 </style></head><body>
-<header><h1>Riskuj – <b>Jižní Amerika</b></h1><button class="mala" id="nova" type="button">Nová hra</button></header>
+<header><h1>Riskuj – <b>Jižní a Střední Amerika</b></h1><span id="naRade"></span><button class="mala" id="jak" type="button">Jak hrát</button><button class="mala" id="nova" type="button">Nová hra</button></header>
 <main id="tabule" aria-label="Tabule otázek"></main>
 <footer id="skore" aria-label="Body týmů"></footer>
 
-<section id="okno" role="dialog" aria-modal="true">
-  <div class="hlava"><span id="okTema"></span><span id="okBody"></span></div>
+<section id="okno" class="vrstva" role="dialog" aria-modal="true" aria-labelledby="otazka">
+  <div class="hlava"><span id="okTema"></span><span id="odpovida"></span></div>
   <div class="stred">
     <div id="otazka"></div>
-    <div id="odpoved"><div class="o" id="odp"></div><div class="d" id="dopl"></div><img id="foto" alt=""></div>
+    <div id="casovac"><button class="mala" id="spustCas" type="button">⏱ Porada 20 s</button><b id="cas" hidden></b></div>
+    <div id="odpoved"><div class="o" id="odp"></div><div class="d" id="dopl"></div><img id="foto" alt=""><div class="kredit" id="kredit"></div></div>
+    <div id="souhlas"><div class="popis" id="souhlasPopis"></div><div class="tl" id="souhlasTl"></div></div>
+    <div id="vysledek" hidden></div>
   </div>
   <div class="akce" id="akce"></div>
   <div class="napoveda" id="napov"></div>
 </section>
 
-<section id="start">
-  <h2>Riskuj – <b>Jižní Amerika</b></h2>
-  <div style="font-size:clamp(20px,2.2vw,34px)">Kolik týmů hraje?</div>
-  <div class="pocty" id="pocty"></div>
+<section id="start" class="vrstva">
+  <h2>Riskuj – <b>Jižní a Střední Amerika</b></h2>
+  <div class="radek">Kolik týmů hraje? <span class="pocty" id="pocty"></span></div>
   <div id="jmena"></div>
-  <div class="akce"><button class="velke" id="zacni" type="button">Začít hru</button><button class="mala" id="pokracuj" type="button" hidden>Pokračovat v rozehrané hře</button></div>
+  <div class="radek">Body za souhlas: <span class="pocty" id="souhlasBody"></span></div>
+  <div class="akce"><button class="velke" id="zacni" type="button">Začít hru</button><button class="mala" id="pokracuj" type="button" hidden>Pokračovat v rozehrané hře</button><button class="mala" id="jak2" type="button">Jak hrát</button></div>
 </section>
-<section id="konec"><h2>Konec – <b>vyhrává <span id="vitez"></span></b></h2><div id="poradi"></div><button class="mala" id="znovu" type="button">Nová hra</button></section>
+<section id="pravidla" class="vrstva" role="dialog" aria-modal="true">
+  <h2>Jak hrát <b>Riskuj</b></h2>
+  <ol>
+    <li>Třída hraje <b>ve 4–6 týmech</b>, každý tým si zvolí mluvčího. Týmy se střídají – kdo je na řadě, ukazuje hra nahoře.</li>
+    <li>Tým na řadě vybere <b>téma a body</b>. Učitel otázku přečte nahlas, tým se poradí (můžete pustit odpočet 20 s) a mluvčí řekne odpověď.</li>
+    <li>Ostatní týmy, které s odpovědí <b>souhlasí</b>, zvednou ruku – nejlépe všechny najednou na „3, 2, 1“. Učitel je označí kliknutím.</li>
+    <li>Učitel ukáže správnou odpověď a klikne na <b>Správně</b>, nebo <b>Špatně</b>.</li>
+    <li>Body: tým na řadě <b>správně = body otázky</b>, špatně = 0. Souhlasící týmy <b>správně +__S__, špatně −__S__</b>. Kdo nesouhlasil, nic nezíská ani neztratí.</li>
+    <li>Pak vybírá další tým. Vyhrává tým s nejvíc body. Body lze opravit tlačítky ±100 dole.</li>
+  </ol>
+  <button class="velke" id="zavriPr" type="button">Rozumím</button>
+</section>
+<section id="konec" class="vrstva"><h2>Konec hry – <b>vítěz: <span id="vitez"></span></b></h2><div id="poradi"></div><button class="mala" id="znovu" type="button">Nová hra</button></section>
 
 <script>
-const T = [{"nazev": "Příroda a rekordy", "otazky": [{"body": 100, "otazka": "Která řeka je nejvodnatější na světě?", "odpoved": "Amazonka", "doplnek": "Teče jí víc vody než kteroukoli jinou řekou na světě.", "img": "../img/ju_amazonie.jpg", "zdroj": "Brazílie – zápis, Ve zkratce"}, {"body": 200, "otazka": "Jak se jmenuje nejvyšší vodopád světa a ve kterém státě padá?", "odpoved": "Salto Ángel – Venezuela", "doplnek": "Padá ze stolové hory, kterým se tu říká tepui.", "img": "../img/ju_angel.jpg", "zdroj": "Venezuela – zápis, Ve zkratce"}, {"body": 300, "otazka": "Jak se jmenuje největší sladkovodní jezero Jižní Ameriky?", "odpoved": "Titicaca", "doplnek": "Leží na hranici Peru a Bolívie.", "img": "../img/ju_titicaca.jpg", "zdroj": "Peru – zápis, Ve zkratce"}, {"body": 400, "otazka": "Jak se jmenuje největší solná pláň světa a ve kterém státě leží?", "odpoved": "Salar de Uyuni – Bolívie", "doplnek": "Zbyla po vyschlých jezerech.", "img": "../img/c_bol_uyuni.jpg", "zdroj": "Bolívie – zápis, Ve zkratce"}, {"body": 500, "otazka": "Jak se jmenuje argentinský ledovec, ze kterého se lámou obří kry?", "odpoved": "Perito Moreno", "doplnek": "Leží na jihu Argentiny.", "img": "../img/ju_perito.jpg", "zdroj": "Argentina – Ve zkratce"}]}, {"nazev": "Co se kde pěstuje a těží", "otazky": [{"body": 100, "otazka": "Kterou plodinu pěstuje Brazílie nejvíc na světě – skoro 40 % světové sklizně?", "odpoved": "kávu", "doplnek": "Nejvíc ale Brazílie vydělá na vývozu ropy a sóji.", "img": "", "zdroj": "Brazílie – zápis, Ve zkratce"}, {"body": 200, "otazka": "Které ovoce vyváží Ekvádor nejvíc na světě?", "odpoved": "banány", "doplnek": "Platí se tam americkým dolarem.", "img": "../img/d_and_banany.jpg", "zdroj": "Ekvádor – zápis, Ve zkratce"}, {"body": 300, "otazka": "Který kov těží Chile nejvíc na světě?", "odpoved": "měď", "doplnek": "Z mědi se vyrábějí elektrické dráty.", "img": "../img/ju_med.jpg", "zdroj": "Chile – zápis, Ve zkratce"}, {"body": 400, "otazka": "Čeho má Venezuela největší zásoby na světě?", "odpoved": "ropy", "doplnek": "Země žije hlavně z jejího vývozu.", "img": "", "zdroj": "Venezuela – zápis, Ve zkratce"}, {"body": 500, "otazka": "Kterých zvířat chová Peru víc než 70 % všech na světě?", "odpoved": "alpak", "doplnek": "V sousední Bolívii zase chovají nejvíc lam na světě.", "img": "../img/ju_lamy.jpg", "zdroj": "Peru a Bolívie – zápis, Ve zkratce"}]}, {"nazev": "Lidé a zvyky", "otazky": [{"body": 100, "otazka": "Jakým jazykem se mluví v Brazílii?", "odpoved": "portugalsky", "doplnek": "V ostatních povinných zemích naší cesty se mluví hlavně španělsky.", "img": "../img/ju_rio.jpg", "zdroj": "Brazílie – zápis; jazyky v základních údajích"}, {"body": 200, "otazka": "Ze kterého státu pochází tanec tango?", "odpoved": "z Argentiny", "doplnek": "Tančí se třeba v ulicích Buenos Aires.", "img": "../img/ju_tango.jpg", "zdroj": "Argentina – zápis, Ve zkratce"}, {"body": 300, "otazka": "Jak se jmenuje slavné město Inků na horském hřebeni v Peru?", "odpoved": "Machu Picchu", "doplnek": "Peru bylo srdcem říše Inků.", "img": "../img/ju_titul.jpg", "zdroj": "Peru – zápis, Ve zkratce"}, {"body": 400, "otazka": "Kde stojí obří kamenné sochy moai?", "odpoved": "na Velikonočním ostrově", "doplnek": "Ostrov v Tichém oceánu patří Chile.", "img": "../img/c_chi_moai.jpg", "zdroj": "Chile – zápis, Ve zkratce"}, {"body": 500, "otazka": "Jak se říká pastevcům na koních v argentinské pampě?", "odpoved": "gaučové", "doplnek": "Na pampě se pasou velká stáda krav.", "img": "../img/ju_gauco.jpg", "zdroj": "Argentina – Ve zkratce"}]}, {"nazev": "Hádej zemi", "otazky": [{"body": 100, "otazka": "Jmenuji se podle rovníku a patří mi ostrovy s obřími želvami. Kdo jsem?", "odpoved": "Ekvádor", "doplnek": "Ostrovům se říká Galapágy.", "img": "../img/ju_galapagy.jpg", "zdroj": "Ekvádor – hádanka"}, {"body": 200, "otazka": "Jmenuji se po Kryštofu Kolumbovi a pěstuji spoustu kávy. Kdo jsem?", "odpoved": "Kolumbie", "doplnek": "Kávu pěstuje na chladných svazích And.", "img": "../img/ju_kava.jpg", "zdroj": "Kolumbie – hádanka"}, {"body": 300, "otazka": "Nemám moře a hlavní město mám podle ústavy jinde, než kde sídlí vláda. Kdo jsem?", "odpoved": "Bolívie", "doplnek": "Hlavní město je Sucre, vláda sídlí v La Paz.", "img": "../img/ju_lapaz.jpg", "zdroj": "Bolívie – hádanka, zápis"}, {"body": 400, "otazka": "V mých Andách je asi 90 činných sopek a na jihu mám pobřeží rozeklané fjordy. Kdo jsem?", "odpoved": "Chile", "doplnek": "Je to dlouhá úzká země mezi Andami a Tichým oceánem.", "img": "../img/d_jiz_osorno.jpg", "zdroj": "Chile – Ve zkratce"}, {"body": 500, "otazka": "U mého jezera Maracaibo blýská nejvíc na Zemi a na severu mě omývá Karibské moře. Kdo jsem?", "odpoved": "Venezuela", "doplnek": "Má největší zásoby ropy na světě.", "img": "../img/c_ven_roques.jpg", "zdroj": "Venezuela – hádanka, Ve zkratce"}]}];
-const KLIC = 'riskuj-jizni-amerika-v1';
+const T = [{"nazev": "Příroda a rekordy", "otazky": [{"body": 100, "otazka": "Která řeka je nejvodnatější na světě?", "odpoved": "Amazonka", "doplnek": "Proteče jí víc vody než kteroukoli jinou řekou na světě.", "img": "../img/ju_amazonie.jpg", "zdroj": "Brazílie – zápis, Ve zkratce", "kredit": "Foto: Neil Palmer, CC BY-SA 2.0 (Wikimedia Commons)"}, {"body": 200, "otazka": "Jak se jmenuje největší sladkovodní jezero Jižní Ameriky?", "odpoved": "Titicaca", "doplnek": "Leží na hranici Peru a Bolívie.", "img": "../img/ju_titicaca.jpg", "zdroj": "Peru – zápis, Ve zkratce", "kredit": "Foto: Qhanaaru, CC0 (Wikimedia Commons)"}, {"body": 300, "otazka": "Jak se jmenuje nejvyšší vodopád světa a ve kterém státě padá?", "odpoved": "Salto Ángel – Venezuela", "doplnek": "Padá z jedné ze stolových hor, kterým se tu říká tepui.", "img": "../img/ju_angel.jpg", "zdroj": "Venezuela – zápis, Ve zkratce", "kredit": "Foto: Diego Delso, CC BY 3.0 (Wikimedia Commons)"}, {"body": 400, "otazka": "Jak se jmenuje největší solná pláň světa a ve kterém státě leží?", "odpoved": "Salar de Uyuni – Bolívie", "doplnek": "Zbyla po vyschlých jezerech.", "img": "../img/c_bol_uyuni.jpg", "zdroj": "Bolívie – zápis, Ve zkratce", "kredit": "Foto: Diego Delso, CC BY-SA 4.0 (Wikimedia Commons)"}, {"body": 500, "otazka": "Jak se jmenuje argentinský ledovec, ze kterého se lámou obří kry?", "odpoved": "Perito Moreno", "doplnek": "Leží na jihu Argentiny.", "img": "../img/ju_perito.jpg", "zdroj": "Argentina – Ve zkratce", "kredit": "Foto: Diego Delso, CC BY-SA 3.0 (Wikimedia Commons)"}]}, {"nazev": "Co se kde pěstuje a těží", "otazky": [{"body": 100, "otazka": "Které ovoce vyváží Ekvádor nejvíc na světě?", "odpoved": "banány", "doplnek": "Platí se tam americkým dolarem.", "img": "../img/d_and_banany.jpg", "zdroj": "Ekvádor – zápis, Ve zkratce", "kredit": "Foto: Dave Lonsdale, CC BY 2.0 (Wikimedia Commons)"}, {"body": 200, "otazka": "Kterých zvířat žije v Peru víc než 70 % všech na světě?", "odpoved": "alpak", "doplnek": "V sousední Bolívii zase chovají nejvíc lam na světě.", "img": "../img/ju_lamy.jpg", "zdroj": "Peru a Bolívie – zápis, Ve zkratce", "kredit": "Foto: Rosella Lopez, CC BY-SA 4.0 (Wikimedia Commons)"}, {"body": 300, "otazka": "Který kov těží Chile nejvíc na světě?", "odpoved": "měď", "doplnek": "Z mědi se vyrábějí elektrické dráty.", "img": "../img/ju_med.jpg", "zdroj": "Chile – zápis, Ve zkratce", "kredit": "Foto: Pierre cb, Public domain (Wikimedia Commons)"}, {"body": 400, "otazka": "Čeho má Venezuela největší zásoby na světě?", "odpoved": "ropy", "doplnek": "Země žije hlavně z vývozu ropy.", "img": "", "zdroj": "Venezuela – zápis, Ve zkratce", "kredit": ""}, {"body": 500, "otazka": "Brazílie pěstuje skoro 40 % kávy světa. Nejvíc ale vydělává na vývozu dvou jiných věcí. Kterých?", "odpoved": "ropy a sóji", "doplnek": "Káva to není, i když jí Brazílie pěstuje nejvíc na světě.", "img": "", "zdroj": "Brazílie – zápis, Ve zkratce", "kredit": ""}]}, {"nazev": "Lidé, zvyky a sport", "otazky": [{"body": 100, "otazka": "Jakým jazykem se mluví v Brazílii?", "odpoved": "portugalsky", "doplnek": "Ve většině ostatních zemí Jižní Ameriky se mluví španělsky.", "img": "../img/ju_rio.jpg", "zdroj": "Brazílie – zápis; jazyky v základních údajích", "kredit": "Foto: Wilfredor, CC0 (Wikimedia Commons)"}, {"body": 200, "otazka": "Ze kterého státu pochází tanec tango?", "odpoved": "z Argentiny", "doplnek": "Tančí se třeba v ulicích Buenos Aires.", "img": "../img/ju_tango.jpg", "zdroj": "Argentina – zápis, Ve zkratce", "kredit": "Foto: McKay Savage from London, UK, CC BY 2.0 (Wikimedia Commons)"}, {"body": 300, "otazka": "Jak se jmenuje slavné město Inků na horském hřebeni v Peru?", "odpoved": "Machu Picchu", "doplnek": "Peru bylo srdcem říše Inků.", "img": "../img/ju_titul.jpg", "zdroj": "Peru – zápis, Ve zkratce", "kredit": "Foto: Martin St-Amant ( S23678 ), CC BY-SA 3.0 (Wikimedia Commons)"}, {"body": 400, "otazka": "Kolikrát vyhrála Brazílie mistrovství světa ve fotbale?", "odpoved": "pětkrát", "doplnek": "Nejvíc ze všech zemí. Slavný Pelé se stal mistrem světa třikrát.", "img": "", "zdroj": "Brazílie – hádanka, téma Sport", "kredit": ""}, {"body": 500, "otazka": "Která malá jihoamerická země pořádala v roce 1930 vůbec první mistrovství světa ve fotbale – a vyhrála ho?", "odpoved": "Uruguay", "doplnek": "Uruguay ve finále porazil Argentinu 4 : 2.", "img": "", "zdroj": "Uruguay – zápis, téma Sport", "kredit": ""}]}, {"nazev": "Zvířata", "otazky": [{"body": 100, "otazka": "Který velký dravý pták plachtí nad Andami?", "odpoved": "kondor andský", "doplnek": "Je to jeden z největších létajících ptáků světa: rozpětí křídel má až zhruba 3 m.", "img": "../img/d_jiz_kondor.jpg", "zdroj": "Chile – Ve zkratce; Peru – téma Příroda", "kredit": "Foto: Hugo Pedel, CC BY-SA 3.0 (Wikimedia Commons)"}, {"body": 200, "otazka": "Které zvíře visí v korunách stromů hlavou dolů a hodně odpočívá?", "odpoved": "lenochod", "doplnek": "Žije v deštných pralesích, třeba v Amazonii.", "img": "../img/st_lenochod.jpg", "zdroj": "Brazílie – téma Příroda (Tukan a lenochod)", "kredit": "Foto: Charles J. Sharp, CC BY-SA 3.0 (Wikimedia Commons)"}, {"body": 300, "otazka": "Jak se jmenuje největší hlodavec na světě?", "odpoved": "kapybara", "doplnek": "Žije u vody a dobře plave, protože má mezi prsty blány.", "img": "../img/d_bra_kapybara.jpg", "zdroj": "Venezuela – zvířata a téma Příroda", "kredit": "Foto: Fernando Flores from Caracas, Venezuela, CC BY-SA 2.0 (Wikimedia Commons)"}, {"body": 400, "otazka": "Kteří ptáci žijí na horských jezerech v Bolívii? Jeden jejich vzácný druh je pojmenovaný po Jamesovi.", "odpoved": "plameňáci", "doplnek": "Plameňák Jamesův žije jen vysoko v Andách.", "img": "../img/d_and_colorada.jpg", "zdroj": "Bolívie – Ve zkratce, téma Plameňáci", "kredit": "Foto: Havardtl, CC BY-SA 4.0 (Wikimedia Commons)"}, {"body": 500, "otazka": "Jak se jmenuje nejdelší papoušek světa? Žije v Brazílii.", "odpoved": "ara hyacintový", "doplnek": "Žije třeba v Pantanalu, jednom z největších mokřadů světa.", "img": "../img/d_bra_arahyacint.jpg", "zdroj": "Brazílie – fotka a téma Pantanal", "kredit": "Foto: Bernard DUPONT from FRANCE, CC BY-SA 2.0 (Wikimedia Commons)"}]}, {"nazev": "Hádej zemi", "otazky": [{"body": 100, "otazka": "Jmenuji se po Kryštofu Kolumbovi a pěstuji spoustu kávy. Kdo jsem?", "odpoved": "Kolumbie", "doplnek": "Kávu pěstuje na chladných svazích And.", "img": "../img/ju_kava.jpg", "zdroj": "Kolumbie – hádanka", "kredit": "Foto: Ricohin, CC BY-SA 3.0 (Wikimedia Commons)"}, {"body": 200, "otazka": "Jmenuji se podle rovníku a patří mi ostrovy s obřími želvami. Kdo jsem?", "odpoved": "Ekvádor", "doplnek": "Ostrovům se říká Galapágy.", "img": "../img/ju_galapagy.jpg", "zdroj": "Ekvádor – hádanka", "kredit": "Foto: Bengt Oberger, CC BY-SA 4.0 (Wikimedia Commons)"}, {"body": 300, "otazka": "Nemám moře a hlavní město mám podle ústavy jinde, než kde sídlí vláda. Kdo jsem?", "odpoved": "Bolívie", "doplnek": "Hlavní město je Sucre, vláda sídlí v La Paz.", "img": "../img/ju_lapaz.jpg", "zdroj": "Bolívie – hádanka, zápis", "kredit": "Foto: Dan Lundberg, CC BY-SA 2.0 (Wikimedia Commons)"}, {"body": 400, "otazka": "V mých Andách je asi 90 činných sopek a na jihu mám pobřeží rozeklané fjordy. Kdo jsem?", "odpoved": "Chile", "doplnek": "Je to dlouhá úzká země mezi Andami a Tichým oceánem.", "img": "../img/d_jiz_osorno.jpg", "zdroj": "Chile – Ve zkratce", "kredit": "Foto: Jorge Morales Piderit, CC BY-SA 4.0 (Wikimedia Commons)"}, {"body": 500, "otazka": "U mého jezera Maracaibo blýská nejvíc na Zemi a na severu mě omývá Karibské moře. Kdo jsem?", "odpoved": "Venezuela", "doplnek": "Má největší zásoby ropy na světě.", "img": "../img/c_ven_roques.jpg", "zdroj": "Venezuela – hádanka, Ve zkratce", "kredit": "Foto: NASA/Tim Kopra, Public domain (Wikimedia Commons)"}]}, {"nazev": "Střední Amerika", "otazky": [{"body": 100, "otazka": "Jak se jmenuje průplav, kterým lodě proplouvají mezi Atlantským a Tichým oceánem?", "odpoved": "Panamský průplav", "doplnek": "Je dlouhý asi 80 km a otevřeli ho v roce 1914.", "img": "../img/st_pruplav.jpg", "zdroj": "výpisky – pevninská část; FAKTA-overeno (pancanal.com)", "kredit": "Foto: Adam Jones, CC BY-SA 2.0 (Wikimedia Commons)"}, {"body": 200, "otazka": "Který ostrov je největší v Karibiku?", "odpoved": "Kuba", "doplnek": "Kuba pěstuje tabák a vyrábí rum.", "img": "../img/st_kuba.jpg", "zdroj": "výpisky – Karibik; FAKTA-overeno (NASA)", "kredit": "Foto: MODIS Land Rapid Response Team, NASA GSFC, Public domain (Wikimedia Commons)"}, {"body": 300, "otazka": "Který národ stavěl na Yucatánu a v Guatemale pyramidy, měl písmo, kalendář a počítal s nulou?", "odpoved": "Mayové", "doplnek": "Mayové nevymřeli – v Guatemale se k nim dnes hlásí 42 % obyvatel.", "img": "../img/st_tikal.jpg", "zdroj": "výpisky – Mexiko; overeni_SA č. 26–27 (NMAI, INE Guatemala)", "kredit": "Foto: Mike Vondran derivative work: MrPanyGoff, CC BY 2.0 (Wikimedia Commons)"}, {"body": 400, "otazka": "Ze které karibské země je sprinter Usain Bolt, který uběhl 100 m za 9,58 s?", "odpoved": "z Jamajky", "doplnek": "Jeho čas 9,58 s je světový rekord z roku 2009.", "img": "../img/st_plaz.jpg", "zdroj": "výpisky – Karibik; FAKTA-overeno (World Athletics)", "kredit": "Foto: VV Nincic from Toronto, Canada, CC BY 2.0 (Wikimedia Commons)"}, {"body": 500, "otazka": "Který stát Střední Ameriky zrušil v roce 1948 armádu?", "odpoved": "Kostarika", "doplnek": "Potvrdila to i ústava z roku 1949.", "img": "", "zdroj": "výpisky – pevninská část; FAKTA-overeno (U.S. State Dept.)", "kredit": ""}]}];
+const KLIC = 'riskuj-jizni-amerika-v3';
 const $ = s => document.querySelector(s);
 const esc = s => String(s).replace(/[&<>"]/g, c => ({'&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;'}[c]));
-let st = null, aktual = null, pocet = 3;
+const POLI = T.length * 5;
+let st = null, akt = null, pocet = 4, souhlasBody = 100, casovac = null;
 const uloz = () => { try { localStorage.setItem(KLIC, JSON.stringify(st)); } catch (e) {} };
-const nacti = () => { try { return JSON.parse(localStorage.getItem(KLIC)); } catch (e) { return null; } };
+const nacti = () => { try { const x = JSON.parse(localStorage.getItem(KLIC)); return x && x.tymy ? x : null; } catch (e) { return null; } };
+const bodyText = n => (n > 0 ? '+' : n < 0 ? '−' : '') + Math.abs(n);
 
 function tabule() {
-  const t = $('#tabule'); t.innerHTML = '';
+  const t = $('#tabule'); t.style.gridTemplateColumns = `repeat(${T.length},1fr)`; t.innerHTML = '';
   T.forEach(x => { const h = document.createElement('div'); h.className = 'tema'; h.textContent = x.nazev; t.appendChild(h); });
   for (let r = 0; r < 5; r++) T.forEach((x, c) => {
     const q = x.otazky[r], id = c + '-' + r, b = document.createElement('button'); b.type = 'button';
-    const kdo = st.hotovo[id];
-    b.className = 'pole' + (kdo !== undefined ? ' hotovo' : '');
-    b.textContent = kdo === undefined ? q.body : (kdo >= 0 ? st.tymy[kdo].n : '—');
-    b.setAttribute('aria-label', `${x.nazev} za ${q.body}` + (kdo !== undefined ? ' – hotovo' : ''));
-    if (kdo === undefined) b.addEventListener('click', () => otevri(c, r));
+    const h = st.hotovo[id];
+    if (h) {
+      b.className = 'pole hotovo'; b.disabled = true;
+      b.innerHTML = h.t >= 0 ? `${esc(st.tymy[h.t].n)}<span class="z ${h.ok ? 'ok' : 'ne'}">${h.ok ? '✓' : '✗'}</span>` : '—';
+      b.setAttribute('aria-label', `${x.nazev} za ${q.body} – odehráno`);
+    } else {
+      b.className = 'pole'; b.textContent = q.body; b.setAttribute('aria-label', `${x.nazev} za ${q.body}`);
+      b.addEventListener('click', () => otevri(c, r));
+    }
     t.appendChild(b);
   });
+  $('#naRade').textContent = 'Na řadě: ' + st.tymy[st.tah].n;
   skore();
-  if (Object.keys(st.hotovo).length === 20) konec();
+  if (Object.keys(st.hotovo).length === POLI) konec();
 }
 function skore() {
-  $('#skore').innerHTML = st.tymy.map((t, i) => `<div class="tym"><span class="jm">${esc(t.n)}</span><span class="sk">${t.b}</span>
-    <span class="uprav"><button type="button" data-i="${i}" data-d="100" aria-label="Přidat 100">+100</button><button type="button" data-i="${i}" data-d="-100" aria-label="Ubrat 100">−100</button></span></div>`).join('');
+  $('#skore').innerHTML = st.tymy.map((t, i) => `<div class="tym${i === st.tah ? ' rada' : ''}"><span class="jm">${esc(t.n)}</span><span class="sk">${t.b}</span>
+    <span class="uprav"><button type="button" data-i="${i}" data-d="100" aria-label="${esc(t.n)}: přidat 100">+100</button><button type="button" data-i="${i}" data-d="-100" aria-label="${esc(t.n)}: ubrat 100">−100</button></span></div>`).join('');
   $('#skore').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { st.tymy[+b.dataset.i].b += +b.dataset.d; uloz(); skore(); }));
 }
+function zastavCas() { clearInterval(casovac); casovac = null; }
 function otevri(c, r) {
-  aktual = {c, r, odkryto: false}; const x = T[c], q = x.otazky[r];
-  $('#okTema').textContent = x.nazev; $('#okBody').textContent = q.body + ' bodů';
+  akt = {c, r, faze: 'otazka', souhlas: new Set()}; const x = T[c], q = x.otazky[r];
+  $('#okTema').textContent = `${x.nazev} · ${q.body} bodů`; $('#odpovida').textContent = 'Odpovídá: ' + st.tymy[st.tah].n;
   $('#otazka').textContent = q.otazka; $('#odp').textContent = q.odpoved; $('#dopl').textContent = q.doplnek || '';
   const f = $('#foto'); if (q.img) { f.src = q.img; f.hidden = false; } else { f.removeAttribute('src'); f.hidden = true; }
-  $('#odpoved').classList.remove('vidi'); $('#okno').classList.remove('odkryto'); $('#okno').classList.add('vidi');
+  $('#kredit').textContent = q.kredit || '';
+  $('#odpoved').classList.remove('vidi'); $('#okno').classList.remove('odkryto'); $('#vysledek').hidden = true;
+  zastavCas(); $('#cas').hidden = true; $('#cas').classList.remove('konec');
+  const ostatni = st.tymy.map((t, i) => i).filter(i => i !== st.tah);
+  $('#souhlas').hidden = false;
+  $('#souhlasPopis').textContent = `Souhlasí s nimi jiný tým? Klikněte na týmy, které zvedly ruku (správně +${souhlasBodyHry()}, špatně −${souhlasBodyHry()}):`;
+  $('#souhlasTl').innerHTML = ostatni.map(i => `<button type="button" aria-pressed="false" data-i="${i}">${esc(st.tymy[i].n)}</button>`).join('');
+  $('#souhlasTl').querySelectorAll('button').forEach(b => b.addEventListener('click', () => {
+    if (akt.faze !== 'otazka') return; const i = +b.dataset.i;
+    akt.souhlas.has(i) ? akt.souhlas.delete(i) : akt.souhlas.add(i); b.setAttribute('aria-pressed', akt.souhlas.has(i)); }));
   $('#akce').innerHTML = `<button class="velke" id="odkryj" type="button">Ukázat odpověď</button><button class="mala" id="zpet" type="button">Zpět bez odpovědi</button>`;
-  $('#napov').textContent = 'Mezerník = ukázat odpověď · Esc = zpět na tabuli (otázka zůstane volná)';
+  $('#napov').textContent = 'Mezerník = ukázat odpověď · Esc = zpět na tabuli (otázka zůstane volná, tým je dál na řadě)';
   $('#odkryj').addEventListener('click', odkryj); $('#zpet').addEventListener('click', zavri);
-  $('#odkryj').focus();
+  $('#okno').classList.add('vidi'); $('#odkryj').focus();
 }
+const souhlasBodyHry = () => st.souhlas || 100;
+$('#spustCas').addEventListener('click', () => {
+  zastavCas(); let s = 20; const el = $('#cas'); el.hidden = false; el.classList.remove('konec'); el.textContent = s;
+  casovac = setInterval(() => { s--; el.textContent = s > 0 ? s : 'Čas!'; if (s <= 0) { el.classList.add('konec'); zastavCas(); } }, 1000);
+});
 function odkryj() {
-  if (!aktual || aktual.odkryto) return; aktual.odkryto = true;
-  const q = T[aktual.c].otazky[aktual.r];
+  if (!akt || akt.faze !== 'otazka') return; akt.faze = 'odkryto'; zastavCas();
   $('#odpoved').classList.add('vidi'); $('#okno').classList.add('odkryto');
-  $('#akce').innerHTML = `<div class="body-t">${st.tymy.map((t, i) => `<span class="t"><button class="plus" type="button" data-i="${i}">✓ ${esc(t.n)} +${q.body}</button><button class="minus" type="button" data-m="${i}" aria-label="${esc(t.n)} −${q.body}">−</button></span>`).join('')}
-    <button class="nikdo" type="button" id="nikdo">Nikdo – zpět na tabuli</button></div>`;
-  $('#napov').textContent = 'Zelené = tým odpověděl správně (body se přičtou a otázka se zavře) · červené − = špatná odpověď (body se odečtou, otázka zůstane otevřená)';
-  $('#akce').querySelectorAll('.plus').forEach(b => b.addEventListener('click', () => { const i = +b.dataset.i; st.tymy[i].b += q.body; dokonci(i); }));
-  $('#akce').querySelectorAll('.minus').forEach(b => b.addEventListener('click', () => { st.tymy[+b.dataset.m].b -= q.body; uloz(); skore(); b.disabled = true; b.style.opacity = .4; }));
-  $('#nikdo').addEventListener('click', () => dokonci(-1));
+  $('#souhlasTl').querySelectorAll('button').forEach(b => b.disabled = true);
+  if (!akt.souhlas.size) $('#souhlasPopis').textContent = 'Nikdo další nesouhlasil.';
+  else $('#souhlasPopis').textContent = 'Souhlasí:';
+  $('#souhlasTl').querySelectorAll('button[aria-pressed=false]').forEach(b => b.hidden = true);
+  const n = st.tymy[st.tah].n;
+  $('#akce').innerHTML = `<button class="velke ok" id="dobre" type="button">✓ ${esc(n)} – správně</button><button class="velke ne" id="spatne" type="button">✗ ${esc(n)} – špatně</button><button class="mala" id="nikdo" type="button">Neodpověděli – bez bodů</button>`;
+  $('#napov').textContent = 'Označte, jestli tým na řadě odpověděl správně. Body se přičtou a odečtou všem najednou.';
+  $('#dobre').addEventListener('click', () => vyhodnot(true)); $('#spatne').addEventListener('click', () => vyhodnot(false));
+  $('#nikdo').addEventListener('click', () => vyhodnot(null));
+  $('#dobre').focus();
 }
-function dokonci(kdo) { st.hotovo[aktual.c + '-' + aktual.r] = kdo; uloz(); zavri(); }
-function zavri() { $('#okno').classList.remove('vidi'); aktual = null; tabule(); }
+function vyhodnot(ok) {
+  if (!akt || akt.faze !== 'odkryto') return; akt.faze = 'hotovo';
+  const q = T[akt.c].otazky[akt.r], S = souhlasBodyHry(), zmeny = [];
+  if (ok !== null) {
+    if (ok) { st.tymy[st.tah].b += q.body; zmeny.push([st.tah, q.body]); } else zmeny.push([st.tah, 0]);
+    akt.souhlas.forEach(i => { const d = ok ? S : -S; st.tymy[i].b += d; zmeny.push([i, d]); });
+  }
+  st.hotovo[akt.c + '-' + akt.r] = ok === null ? {t: -1, ok: null} : {t: st.tah, ok};
+  st.tah = (st.tah + 1) % st.tymy.length; uloz(); skore();
+  const v = $('#vysledek'); v.hidden = false;
+  v.innerHTML = ok === null ? 'Bez bodů.' : zmeny.map(([i, d]) => `${esc(st.tymy[i].n)} <span class="${d > 0 ? 'p' : d < 0 ? 'm' : ''}">${bodyText(d)}</span>`).join(' · ');
+  $('#souhlas').hidden = true;
+  $('#akce').innerHTML = `<button class="velke" id="dal" type="button">Dál – na řadě: ${esc(st.tymy[st.tah].n)}</button>`;
+  $('#napov').textContent = 'Enter = zpět na tabuli';
+  $('#dal').addEventListener('click', zavri); $('#dal').focus();
+}
+function zavri() { zastavCas(); $('#okno').classList.remove('vidi'); akt = null; tabule(); }
 function konec() {
-  const p = st.tymy.map((t, i) => ({...t, i})).sort((a, b) => b.b - a.b);
-  const nej = p.filter(x => x.b === p[0].b).map(x => x.n);
-  $('#vitez').textContent = nej.join(' a ');
+  const p = st.tymy.map(t => ({...t})).sort((a, b) => b.b - a.b);
+  $('#vitez').textContent = p.filter(x => x.b === p[0].b).map(x => x.n).join(' a ');   // remíza: „Lamy a Kondoři“
   $('#poradi').innerHTML = p.map((t, k) => `${k + 1}. ${esc(t.n)} – <b>${t.b}</b> bodů`).join('<br>');
   $('#konec').classList.add('vidi');
 }
+const PRAVIDLA = $('#pravidla ol').innerHTML;            // šablona s __S__ = body za souhlas
+function pravidla() {
+  const S = st && !$('#start').classList.contains('vidi') ? souhlasBodyHry() : souhlasBody;
+  $('#pravidla ol').innerHTML = PRAVIDLA.split('__S__').join(S); $('#pravidla').classList.add('vidi'); $('#zavriPr').focus();
+}
 function startObrazovka() {
-  const ulozena = nacti();
-  $('#pokracuj').hidden = !(ulozena && ulozena.tymy);
+  $('#pokracuj').hidden = !nacti();
   const kresli = () => {
-    $('#pocty').innerHTML = [2, 3, 4, 5, 6].map(n => `<button type="button" aria-pressed="${n === pocet}" data-n="${n}">${n}</button>`).join('');
+    $('#pocty').innerHTML = [2, 3, 4, 5, 6, 7, 8].map(n => `<button type="button" aria-pressed="${n === pocet}" data-n="${n}">${n}</button>`).join('');
     $('#pocty').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { pocet = +b.dataset.n; kresli(); }));
+    $('#souhlasBody').innerHTML = [50, 100, 200].map(n => `<button type="button" aria-pressed="${n === souhlasBody}" data-s="${n}">${n}</button>`).join('');
+    $('#souhlasBody').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { souhlasBody = +b.dataset.s; kresli(); }));
     const stara = [...document.querySelectorAll('#jmena input')].map(i => i.value);
     $('#jmena').innerHTML = Array.from({length: pocet}, (_, i) => `<input aria-label="Jméno týmu ${i + 1}" value="${esc(stara[i] || 'Tým ' + (i + 1))}">`).join('');
   };
   kresli(); $('#konec').classList.remove('vidi'); $('#start').classList.add('vidi');
 }
 $('#zacni').addEventListener('click', () => {
-  st = {tymy: [...document.querySelectorAll('#jmena input')].map((i, k) => ({n: i.value.trim() || 'Tým ' + (k + 1), b: 0})), hotovo: {}};
+  st = {v: 2, tymy: [...document.querySelectorAll('#jmena input')].map((i, k) => ({n: i.value.trim() || 'Tým ' + (k + 1), b: 0})), hotovo: {}, tah: 0, souhlas: souhlasBody};
   uloz(); $('#start').classList.remove('vidi'); tabule();
 });
 $('#pokracuj').addEventListener('click', () => { st = nacti(); $('#start').classList.remove('vidi'); tabule(); });
-$('#nova').addEventListener('click', () => { if (confirm('Začít novou hru? Body a otevřené otázky se smažou.')) startObrazovka(); });
+$('#nova').addEventListener('click', () => { if (confirm('Začít novou hru? Body a odehraná pole se smažou.')) startObrazovka(); });
 $('#znovu').addEventListener('click', startObrazovka);
+$('#jak').addEventListener('click', pravidla); $('#jak2').addEventListener('click', pravidla);
+$('#zavriPr').addEventListener('click', () => $('#pravidla').classList.remove('vidi'));
 document.addEventListener('keydown', e => {
-  if (!$('#okno').classList.contains('vidi')) return;
-  if (e.key === ' ' || e.key === 'Enter') { if (aktual && !aktual.odkryto) { e.preventDefault(); odkryj(); } }
-  else if (e.key === 'Escape') { if (aktual && aktual.odkryto) dokonci(-1); else zavri(); }
+  if ($('#pravidla').classList.contains('vidi')) { if (e.key === 'Escape') $('#pravidla').classList.remove('vidi'); return; }
+  if (!$('#okno').classList.contains('vidi') || !akt) return;
+  if (akt.faze === 'otazka' && e.key === ' ') { e.preventDefault(); odkryj(); }
+  else if (akt.faze === 'otazka' && e.key === 'Escape') zavri();
+  else if (akt.faze === 'hotovo' && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); zavri(); }
 });
 startObrazovka();
 </script></body></html>
