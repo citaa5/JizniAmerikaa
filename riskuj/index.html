@@ -28,6 +28,13 @@ footer{display:flex;gap:.8vw;padding:1vh 2vw 1.6vh;flex-wrap:wrap;justify-conten
 .tym{background:#17283D;border:3px solid transparent;border-radius:14px;padding:.5vh 1vw;display:flex;align-items:center;gap:.7vw}
 .tym.rada{border-color:var(--zlata)}
 .tym .jm{font-weight:700;font-size:clamp(14px,1.4vw,22px)}.tym .sk{font-weight:900;font-size:clamp(20px,2.3vw,36px);color:var(--zlata);min-width:2.6ch;text-align:right}
+.tym .kazen{background:#4A2420;color:#F2B1A8;border-radius:8px;font-size:clamp(11px,.95vw,15px);font-weight:800;padding:.3em .55em}
+.tym .kazen:hover{background:var(--spatne);color:#fff}
+#hlaska{position:fixed;left:50%;top:40%;transform:translate(-50%,-50%) scale(.9);background:var(--spatne);color:#fff;font-weight:900;font-size:clamp(26px,4vw,64px);padding:.4em 1em;border-radius:20px;opacity:0;pointer-events:none;z-index:20;transition:opacity .25s,transform .25s;text-align:center}
+#hlaska.vidi{opacity:1;transform:translate(-50%,-50%) scale(1)}
+#kazenRadek{display:flex;gap:.5vw;justify-content:center;align-items:center;flex-wrap:wrap;font-size:clamp(11px,.95vw,15px);color:#9C6B66}
+#kazenRadek button{background:#2A1C22;color:#E9A49B;border:1px solid #5A2E2A;border-radius:8px;padding:.2em .6em;font-size:inherit;font-weight:700}
+#kazenRadek button:hover{background:var(--spatne);color:#fff}
 .tym .uprav{display:flex;flex-direction:column;gap:2px}.tym .uprav button{background:#24384F;border-radius:6px;font-size:12px;padding:1px 6px;color:var(--tlum)}
 .vrstva{position:fixed;inset:0;background:var(--bg);display:none;flex-direction:column;padding:2.5vh 4vw;gap:1.6vh;z-index:5;overflow:auto}
 .vrstva.vidi{display:flex}
@@ -86,6 +93,7 @@ footer{display:flex;gap:.8vw;padding:1vh 2vw 1.6vh;flex-wrap:wrap;justify-conten
 <header><h1>Riskuj – <b>Jižní a Střední Amerika</b></h1><span id="naRade"></span><button class="mala" id="jak" type="button">Jak hrát</button><button class="mala" id="naFinale" type="button">Finále ▶</button><button class="mala" id="nova" type="button">Nová hra</button></header>
 <main id="tabule" aria-label="Tabule otázek"></main>
 <footer id="skore" aria-label="Body týmů"></footer>
+<div id="hlaska" role="status" aria-live="assertive"></div>
 
 <section id="okno" class="vrstva" role="dialog" aria-modal="true" aria-labelledby="otazka">
   <div class="hlava"><span id="okTema"></span><span id="odpovida"></span></div>
@@ -98,6 +106,7 @@ footer{display:flex;gap:.8vw;padding:1vh 2vw 1.6vh;flex-wrap:wrap;justify-conten
   </div>
   <div class="akce" id="akce"></div>
   <div class="napoveda" id="napov"></div>
+  <div id="kazenRadek" aria-label="Mínus 100 za kázeň"></div>
 </section>
 
 <section id="start" class="vrstva">
@@ -116,6 +125,7 @@ footer{display:flex;gap:.8vw;padding:1vh 2vw 1.6vh;flex-wrap:wrap;justify-conten
     <li>Učitel ukáže správnou odpověď a klikne na <b>Správně</b>, nebo <b>Špatně</b>.</li>
     <li>Body: tým na řadě <b>správně = body otázky</b>, špatně = 0. Souhlasící týmy <b>správně +__S__, špatně −__S__</b>. Kdo nesouhlasil, nic nezíská ani neztratí.</li>
     <li>Pak vybírá další tým. Body lze opravit tlačítky ±100 dole.</li>
+    <li><b>Kázeň:</b> tým, který vykřikuje odpověď mimo pořadí, napovídá jinému týmu nebo ruší, dostane <b>−100 bodů</b>. Učitel je odečte tlačítkem <b>⚠ −100</b> u týmu dole.</li>
     <li><b>Finále:</b> po odehrání tabule (nebo dřív tlačítkem Finále) hrají všechny týmy najednou jednu otázku. Každý tým nejdřív <b>vsadí část svých bodů</b> (kdo má méně než 300, může vsadit až 300), odpověď napíše na papír – správně sázku získá, špatně ji ztratí. Vyhrává tým s nejvíc body.</li>
   </ol>
   <button class="velke" id="zavriPr" type="button">Rozumím</button>
@@ -164,8 +174,18 @@ function tabule() {
 }
 function skore() {
   $('#skore').innerHTML = st.tymy.map((t, i) => `<div class="tym${i === st.tah ? ' rada' : ''}"><span class="jm">${esc(t.n)}</span><span class="sk">${t.b}</span>
-    <span class="uprav"><button type="button" data-i="${i}" data-d="100" aria-label="${esc(t.n)}: přidat 100">+100</button><button type="button" data-i="${i}" data-d="-100" aria-label="${esc(t.n)}: ubrat 100">−100</button></span></div>`).join('');
-  $('#skore').querySelectorAll('button').forEach(b => b.addEventListener('click', () => { st.tymy[+b.dataset.i].b += +b.dataset.d; uloz(); skore(); }));
+    <span class="uprav"><button type="button" data-i="${i}" data-d="100" aria-label="${esc(t.n)}: přidat 100">+100</button><button type="button" data-i="${i}" data-d="-100" aria-label="${esc(t.n)}: ubrat 100">−100</button></span>
+    <button type="button" class="kazen" data-k="${i}" aria-label="${esc(t.n)}: −100 za kázeň" title="Mínus 100 za kázeň">⚠ −100</button></div>`).join('');
+  $('#skore').querySelectorAll('button[data-d]').forEach(b => b.addEventListener('click', () => { st.tymy[+b.dataset.i].b += +b.dataset.d; uloz(); skore(); }));
+  $('#skore').querySelectorAll('button[data-k]').forEach(b => b.addEventListener('click', () => {
+    kazen(+b.dataset.k); }));
+}
+function kazen(i) {                                      // −100 za kázeň (vykřikování, napovídání, rušení)
+  const t = st.tymy[i]; t.b -= 100; t.kazen = (t.kazen || 0) + 1; uloz(); skore(); hlaska(`${t.n} −100\u00a0za\u00a0kázeň`);
+}
+function hlaska(text) {                                   // krátké upozornění přes celou šířku (kázeň)
+  const h = $('#hlaska'); h.textContent = text; h.classList.remove('vidi'); void h.offsetWidth; h.classList.add('vidi');
+  clearTimeout(hlaska.t); hlaska.t = setTimeout(() => h.classList.remove('vidi'), 2600);
 }
 function zastavCas() { clearInterval(casovac); casovac = null; }
 function otevri(c, r) {
@@ -186,6 +206,8 @@ function otevri(c, r) {
   $('#akce').innerHTML = `<button class="velke" id="odkryj" type="button">Ukázat odpověď</button><button class="mala" id="zpet" type="button">Zpět bez odpovědi</button>`;
   $('#napov').textContent = 'Mezerník = ukázat odpověď · Esc = zpět na tabuli (otázka zůstane volná, tým je dál na řadě)';
   $('#odkryj').addEventListener('click', odkryj); $('#zpet').addEventListener('click', zavri);
+  $('#kazenRadek').innerHTML = '<span>⚠ Kázeň −100:</span>' + st.tymy.map((t, i) => `<button type="button" data-k="${i}">${esc(t.n)}</button>`).join('');
+  $('#kazenRadek').querySelectorAll('button').forEach(b => b.addEventListener('click', () => kazen(+b.dataset.k)));
   $('#okno').classList.add('vidi'); $('#odkryj').focus();
 }
 const souhlasBodyHry = () => st.souhlas || 100;
@@ -274,7 +296,7 @@ $('#naFinale').addEventListener('click', () => {
 function konec() {
   const p = st.tymy.map(t => ({...t})).sort((a, b) => b.b - a.b);
   $('#vitez').textContent = p.filter(x => x.b === p[0].b).map(x => x.n).join(' a ');   // remíza: „Lamy a Kondoři“
-  $('#poradi').innerHTML = p.map((t, k) => `${k + 1}. ${esc(t.n)} – <b>${t.b}</b> bodů`).join('<br>');
+  $('#poradi').innerHTML = p.map((t, k) => `${k + 1}. ${esc(t.n)} – <b>${t.b}</b> bodů${t.kazen ? ` <span style="color:#E07A6E;font-size:.7em">(⚠ kázeň ${t.kazen}×)</span>` : ''}`).join('<br>');
   $('#finale').classList.remove('vidi');
   $('#konec').classList.add('vidi');
 }
