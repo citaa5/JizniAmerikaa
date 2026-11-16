@@ -11,6 +11,7 @@
     --ok: #2e7d32; --okbg: #e3f2e5; --chyba: #c62828; --chybabg: #fdecea; --bila: #fff;
   }
   * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
   body { margin: 0; font-family: Calibri, "Segoe UI", Arial, sans-serif; background: var(--seda); color: var(--text); font-size: 22px; }
   header { background: var(--navy); color: var(--bila); padding: 18px 24px; border-bottom: 6px solid var(--zluta); }
   header h1 { margin: 0; font-size: 34px; }
@@ -63,6 +64,22 @@
   .sipky .ne { color: var(--navy); font-weight: bold; padding-left: 20px; }
   .zaver { background: var(--zluta); border-radius: 14px; padding: 14px 18px; margin-top: 20px; }
   .zaver b { font-size: 26px; }
+  .hledej { font-size: 30px; font-weight: bold; color: var(--navy); margin: 6px 0 12px; display: flex; gap: 24px; flex-wrap: wrap; align-items: center; }
+  .hledej .cil4 { background: var(--zluta); color: var(--text); padding: 6px 16px; border-radius: 10px; }
+  .hledej .cas { font-variant-numeric: tabular-nums; }
+  .plocha { position: relative; height: 520px; background: #3b6b8f; border-radius: 14px; overflow: hidden; }
+  .plocha .s4 { position: absolute; white-space: nowrap; }
+  .slozky4 { display: grid; grid-template-columns: repeat(5, 1fr); gap: 12px; }
+  .slozky4 .sl { background: var(--bila); border: 3px solid var(--navy); border-radius: 12px; }
+  .slozky4 .sl h3 { margin: 0; padding: 8px; background: var(--navy); color: var(--bila); border-radius: 8px 8px 0 0; font-size: 22px; text-align: center; }
+  .slozky4 .sl .obsah4 { padding: 8px; display: flex; flex-direction: column; gap: 6px; }
+  .s4 { background: var(--bila); border: 2px solid #9aa7b8; border-radius: 8px; padding: 4px 8px; cursor: pointer; font-size: 19px; user-select: none; }
+  .slozky4 .s4 { border-color: #d0d7e0; }
+  .s4.trefa { background: var(--okbg); border-color: var(--ok); }
+  .s4.vedle { background: var(--chybabg); border-color: var(--chyba); }
+  .start4 { display: flex; gap: 14px; flex-wrap: wrap; margin: 10px 0 16px; }
+  .start4 button { font: inherit; font-weight: bold; padding: 14px 24px; border-radius: 12px; border: none; cursor: pointer; }
+  .vysledky4 { background: var(--bila); border-radius: 14px; padding: 14px 18px; margin-top: 16px; font-size: 24px; }
   @media (max-width: 900px) { .skupiny { grid-template-columns: repeat(2, 1fr) !important; } body { font-size: 19px; } }
 </style>
 </head>
@@ -72,6 +89,7 @@
   <button data-k="c1" class="aktivni">1 Co je v počítači</button>
   <button data-k="c2">2 Co když…?</button>
   <button data-k="c3">3 Kam co uložit</button>
+  <button data-k="c4">4 Najdi soubor</button>
 </nav>
 <main>
   <section id="c1" class="aktivni">
@@ -124,6 +142,19 @@
       <p>Teď společně: <b>Fotka z výletu pro babičku</b> – cloud, nebo oboje? A <b>uložená pozice ve hře</b>?</p>
       <p><b>Na čem mi záleží, to mám na dvou místech.</b></p>
     </div>
+  </section>
+
+  <section id="c4">
+    <h2>4 Najdi soubor</h2>
+    <p class="zadani">Stránka ti napíše, který soubor máš najít. Najdi ho a klikni na něj. Hledáš tři soubory, stopky běží.
+      Pak to samé zkusíš na druhé ploše. Kde najdeš soubory rychleji?</p>
+    <div class="start4">
+      <button class="hlavni" data-v="poradek">Začít: POŘÁDEK (složky)</button>
+      <button class="vedlejsi" data-v="chaos">Začít: CHAOS (rozházená plocha)</button>
+    </div>
+    <div class="hledej" hidden><span>Najdi: <span class="cil4"></span></span><span class="cas">0,0 s</span><span class="kolik"></span></div>
+    <div class="hraci"></div>
+    <div class="vysledky4" hidden></div>
   </section>
 </main>
 
@@ -282,7 +313,97 @@ document.querySelectorAll(".napoveda .volba button").forEach(b => b.addEventList
   n.querySelector(".n-sipky").hidden = b.dataset.n !== "sipky";
 }));
 
-trideni("c1"); pravdaLez(); trideni("c3");
+// najdi soubor: pořádek × chaos
+const SLOZKY4 = {
+  "Zvířata": ["Pes Alík", "Kočka Líza", "Slon", "Opice", "Žirafa", "Kůň", "Ovečka", "Želva"],
+  "Jídlo": ["Banán", "Jahoda", "Pizza", "Polévka", "Meloun", "Koláč", "Palačinka", "Jablko"],
+  "Sport": ["Míč", "Kolo", "Lyže", "Sáně", "Bazén", "Hokej", "Fotbal", "Šipky"],
+  "Výlety": ["Zámek", "Jezero", "Les", "Moře", "Hory", "Zoo", "Louka", "Kopec"],
+  "Hudba": ["Kytara", "Buben", "Housle", "Piano", "Flétna", "Zvonek", "Písnička", "Píšťalka"]
+};
+const HLEDANE = [["Kočka Líza", "Jezero", "Housle"], ["Palačinka", "Lyže", "Želva"]];
+
+function najdiSoubor() {
+  const sek = document.getElementById("c4"), hraci = sek.querySelector(".hraci");
+  const panel = sek.querySelector(".hledej"), cilEl = sek.querySelector(".cil4"), casEl = sek.querySelector(".cas");
+  const kolikEl = sek.querySelector(".kolik"), vys = sek.querySelector(".vysledky4"), start = sek.querySelector(".start4");
+  const vse = Object.values(SLOZKY4).flat();
+  let casy = {}, kolo = 0, poradi = [], hledane = [], krok = 0, t0 = 0, tik = null;
+  const fmt = s => s.toFixed(1).replace(".", ",") + " s";
+
+  function soubor(nazev) {
+    const el = document.createElement("div");
+    el.className = "s4"; el.textContent = "📄 " + nazev;
+    el.addEventListener("click", () => klik(el, nazev));
+    return el;
+  }
+  function poradek() {
+    const w = document.createElement("div"); w.className = "slozky4";
+    Object.entries(SLOZKY4).forEach(([jm, soubory]) => {
+      const sl = document.createElement("div"); sl.className = "sl";
+      sl.innerHTML = `<h3>📁 ${jm}</h3><div class="obsah4"></div>`;
+      soubory.slice().sort((a, b) => a.localeCompare(b, "cs")).forEach(n => sl.querySelector(".obsah4").appendChild(soubor(n)));
+      w.appendChild(sl);
+    });
+    return w;
+  }
+  function chaos() {
+    const w = document.createElement("div"); w.className = "plocha";
+    const sl = 8, rad = 5, sirka = Math.max(hraci.clientWidth, 700);
+    zamichej(vse).forEach((n, i) => {
+      const el = soubor(n);
+      const x = (i % sl) * (sirka - 150) / (sl - 1) + (Math.random() * 50 - 25);
+      const y = Math.floor(i / sl) * 95 + 10 + Math.random() * 55;
+      el.style.left = Math.max(4, x) + "px"; el.style.top = y + "px";
+      el.style.transform = `rotate(${Math.round(Math.random() * 16 - 8)}deg)`;
+      w.appendChild(el);
+    });
+    return w;
+  }
+  function spustKolo() {
+    const v = poradi[kolo];
+    hledane = HLEDANE[kolo]; krok = 0;
+    hraci.innerHTML = ""; hraci.appendChild(v === "poradek" ? poradek() : chaos());
+    panel.hidden = false; ukazCil();
+    t0 = performance.now(); clearInterval(tik);
+    tik = setInterval(() => { casEl.textContent = fmt((performance.now() - t0) / 1000); }, 100);
+  }
+  function ukazCil() { cilEl.textContent = hledane[krok]; kolikEl.textContent = `${krok + 1} ze 3`; }
+  function klik(el, nazev) {
+    if (!hledane.length || krok >= hledane.length) return;
+    if (nazev !== hledane[krok]) { el.classList.add("vedle"); setTimeout(() => el.classList.remove("vedle"), 500); return; }
+    el.classList.add("trefa"); krok++;
+    if (krok < hledane.length) { ukazCil(); return; }
+    clearInterval(tik);
+    const s = (performance.now() - t0) / 1000; casy[poradi[kolo]] = s; casEl.textContent = fmt(s);
+    kolo++;
+    vys.hidden = false;
+    if (kolo < 2) {
+      const dalsi = poradi[kolo] === "poradek" ? "POŘÁDEK (složky)" : "CHAOS (rozházená plocha)";
+      vys.innerHTML = `Hotovo za <b>${fmt(s)}</b>. Teď druhá plocha: ${dalsi}. <button class="hlavni" style="font:inherit;font-weight:bold;padding:8px 18px;border-radius:10px;border:none;cursor:pointer">Pokračovat</button>`;
+      vys.querySelector("button").addEventListener("click", () => { vys.hidden = true; spustKolo(); });
+    } else {
+      const p = casy.poradek, c = casy.chaos;
+      const veta = p < c ? "Ve složkách jsi hledal/a rychleji."
+        : p === c ? "Stejně rychle. A co kdyby souborů bylo sto?"
+        : "Tentokrát ti šel rychleji chaos. Zkus to znovu – a co kdyby souborů bylo sto?";
+      vys.innerHTML = `Pořádek (složky): <b>${fmt(p)}</b> · Chaos (plocha): <b>${fmt(c)}</b><br>${veta}
+        <br><button class="vedlejsi" style="font:inherit;font-weight:bold;padding:8px 18px;border-radius:10px;cursor:pointer;margin-top:10px">Začít znovu</button>`;
+      vys.querySelector("button").addEventListener("click", reset);
+      hledane = [];
+    }
+  }
+  function reset() {
+    clearInterval(tik); casy = {}; kolo = 0; hledane = [];
+    hraci.innerHTML = ""; panel.hidden = true; vys.hidden = true; start.hidden = false;
+  }
+  start.querySelectorAll("button").forEach(b => b.addEventListener("click", () => {
+    poradi = b.dataset.v === "poradek" ? ["poradek", "chaos"] : ["chaos", "poradek"];
+    start.hidden = true; spustKolo();
+  }));
+}
+
+trideni("c1"); pravdaLez(); trideni("c3"); najdiSoubor();
 </script>
 </body>
 </html>
